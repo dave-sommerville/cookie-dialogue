@@ -105,8 +105,10 @@ function settings() {
 	} 
 }
 
+listen('load', window, () => {
+	hasCookies();
+});
 
-hasCookies();
 getOperatingSystem();
 getBrowser();
 
