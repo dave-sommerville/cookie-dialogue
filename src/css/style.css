@@ -16,3 +16,87 @@
 	cursor: pointer;
 }
 
+:root {
+	--clr-drk-1: #777da7;
+	--clr-drk-2: #814b4e;
+	--clr-accent-1: #fac05e;
+	--clr-accent: #fac05e;
+	--clr-accent-2: #f79d84;
+	--clr-blue: #3fa7d6;
+	--clr-orange: #ee6352;
+	--clr-green: #59cd90;
+	--clr-text: #fefefe;
+}
+
+body {		
+	font-family: "Poppins", Arial, sans-serif;
+	color: #fefefe;
+	background-color: #456;
+}
+
+main {
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	z-index: 0;
+}
+
+.toggle-display {
+	width: 40svw;
+	height: 15svh;
+	background-color: var(--clr-drk-2);
+	text-align: center;
+}
+
+.toggle-display {
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
+
+.slider-display {
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+}
+
+.toggle-container {
+  display: inline-block;
+  position: relative;
+  width: 70px;
+  height: 40px;
+}
+
+/* Hidden checkbox */
+.toggle-checkbox {
+  display: none;
+}
+
+/* Label (outer oval) */
+.toggle-label {
+  display: block;
+  background-color: var(--clr-accent-1);
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Ball (inner circle) */
+.toggle-ball {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 33px;
+  height: 33px;
+  background-color: var(--clr-drk-1);
+  transition: transform 0.3s ease;
+}
+
+/* Translation with absolute positioning to give the toggle appearnace */
+.toggle-checkbox:checked + .toggle-label {
+  background-color: var(--clr-green); 
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-ball {
+  transform: translateX(31px);
+}

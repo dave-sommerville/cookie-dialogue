@@ -15,6 +15,7 @@ function listen(event, selector, callback) {
 /*------------------------------------>
     Variable Declarations
 <-----------------------------------*/
+const toggle = select("#toggle");
 
 const userAgent = navigator.userAgent;
 let userLang = navigator.language;
@@ -56,3 +57,10 @@ function getBrowser() {
 	}
 }
 
+listen("change", toggle, () => {
+	// if(toggle.checked) {
+	// 	targetShape.classList.add('circle');
+	// } else {
+	// 	targetShape.classList.remove('circle');
+	// }
+});
