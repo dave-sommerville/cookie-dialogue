@@ -16,6 +16,10 @@
 	cursor: pointer;
 }
 
+.circle {
+	border-radius: 50%;
+}
+
 :root {
 	--clr-drk-1: #777da7;
 	--clr-drk-2: #814b4e;
@@ -43,7 +47,7 @@ main {
 	z-index: 0;
 }
 
-.cookie-dialogue {
+.cookie-dialogue, .cookie-settings {
 	width: 300px;
 	height: 350px;
 	border-radius: 25px;
@@ -76,24 +80,27 @@ button:hover {
 	color: #fff;
 	background-color: #3fa7d6;
 }
-
-.toggle-display {
-	width: 40svw;
-	height: 15svh;
-	background-color: var(--clr-drk-2);
-	text-align: center;
+/* Parent container for the toggle group */
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.toggle-display {
-	border-top-right-radius: 15px;
-	border-top-left-radius: 15px;
+/* Individual toggle item */
+.toggle-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.slider-display {
-	border-bottom-right-radius: 15px;
-	border-bottom-left-radius: 15px;
+/* Text for each toggle */
+.toggle-text {
+  font-size: 1rem;
+  color: var(--clr-dark-text, #333);
 }
 
+/* Reuse existing toggle styles */
 .toggle-container {
   display: inline-block;
   position: relative;
@@ -101,12 +108,10 @@ button:hover {
   height: 40px;
 }
 
-/* Hidden checkbox */
 .toggle-checkbox {
   display: none;
 }
 
-/* Label (outer oval) */
 .toggle-label {
   display: block;
   background-color: var(--clr-accent-1);
@@ -117,7 +122,6 @@ button:hover {
   transition: background-color 0.3s ease;
 }
 
-/* Ball (inner circle) */
 .toggle-ball {
   position: absolute;
   top: 3px;
@@ -128,9 +132,8 @@ button:hover {
   transition: transform 0.3s ease;
 }
 
-/* Translation with absolute positioning to give the toggle appearnace */
 .toggle-checkbox:checked + .toggle-label {
-  background-color: var(--clr-green); 
+  background-color: var(--clr-green);
 }
 
 .toggle-checkbox:checked + .toggle-label .toggle-ball {
