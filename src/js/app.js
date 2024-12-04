@@ -22,40 +22,47 @@ const date = new Date();
 date.setSeconds(date.getSeconds() + 15); 
 let UTCDate = date.toUTCString();
 
+const osToggle = select('#toggle1');
+const browserToggle = select('#toggle2');
+const widthToggle = select('#toggle3');
+const heightToggle = select('#toggle4');
+const savePreferences = select('.save-preferences');
+const acceptAllButton = select('.accept');
+const cookieDialogue = select('.cookie-dialogue');
+const cookieSettings = select('.cookie-settings');
+const userSettings = select('.settings')
+
 /*------------------------------------>
     Cookie Functions
 <-----------------------------------*/
+function hasCookies() {
+	if (document.cookie.length <= 0) {
+		cookieDialogue.classList.remove('hidden');
+	}
+}
 
 function setCookie(name, value) {								// Catch this 
-    document.cookie = `${name}=${encodeURIComponent(value)};expires=${UTCDate};path=/;SameSite=Lax`;
+  document.cookie = `${name}=${encodeURIComponent(value)};expires=${UTCDate};path=/;SameSite=Lax`;
 }
 
 function getCookie(name) {
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookies = decodedCookie.split(';');
-    name = name + '=';
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-    return null; // It wasn't null, it was something else 
+	const match = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+	return match ? decodeURIComponent(match[1]) : null;
 }
 
 let operatingSystem = 'Unknown OS';
 
 function getOperatingSystem() {
     if (userAgent.includes('Windows')) {
-        operatingSystem = 'Operating System: Windows';
+      operatingSystem = 'Operating System: Windows';
     } else if (userAgent.includes('Macintosh')) {
-        operatingSystem = 'Operating System: Mac OS';
+      operatingSystem = 'Operating System: Mac OS';
     } else if (userAgent.includes('iPhone') || userAgent.includes('iPad') || userAgent.includes('iPod')) {
-        operatingSystem = 'Operating System: iOS';
+      operatingSystem = 'Operating System: iOS';
     } else if (userAgent.includes('Android')) {
-        operatingSystem = 'Operating System: Android';
+      operatingSystem = 'Operating System: Android';
     } else if (userAgent.includes('Linux')) {
-        operatingSystem = 'Operating System: Linux';
+      operatingSystem = 'Operating System: Linux';
     }
 }
 
@@ -75,27 +82,50 @@ function getBrowser() {
     }
 }
 
-getOperatingSystem();
-getBrowser();
-setCookie('Operating System', operatingSystem);
-setCookie('Browser', browser);
-setCookie('Screen Width', pageWidth);
-setCookie('Screen Height', pageHeight);
 
-function displayCookies() {
-    const os = getCookie('Operating System');
-    const browser = getCookie('Browser');
-    const screenWidth = getCookie('Screen Width');
-    const screenHeight = getCookie('Screen Height');
+function acceptAll() {
+	setCookie("Operating System", operatingSystem);
+	setCookie("Browser", browser);
+	setCookie("Screen Width", pageWidth.toString());
+	setCookie("Screen Height", pageHeight.toString());
+}
 
-    log(os);
-    log(browser);
-    log('Screen Width:', screenWidth); // Haven't been able to remove this portion
-    log('Screen Height:', screenHeight);
+function settings() {
+	if (osToggle.checked) {
+			setCookie("Operating System", operatingSystem);
+	} 
+	if (browserToggle.checked) {
+			setCookie("Browser", browser);
+	} 
+	if (widthToggle.checked) {
+			setCookie("Screen Width", pageWidth.toString());
+	} 
+	if (heightToggle.checked) {
+			setCookie("Screen Height", pageHeight.toString());
+	} 
 }
 
 
-displayCookies();
-log('Operating System (variable):', operatingSystem);
-log('UTC Expiration Date:', UTCDate);
-log('All Cookies:', document.cookie);
+hasCookies();
+getOperatingSystem();
+getBrowser();
+
+listen('click', userSettings, () => {
+	cookieSettings.classList.remove('hidden');
+	cookieDialogue.classList.add('hidden');
+});
+
+listen('click', acceptAllButton, () => {
+	acceptAll();
+	cookieDialogue.classList.add('hidden');
+});
+
+listen('click', savePreferences, () => {
+	settings();
+	cookieSettings.classList.add('hidden');
+});
+
+log(getCookie('Operating System'));
+log(getCookie('Browser'));
+log(getCookie('Screen Width'));
+log(getCookie('Screen Height'));

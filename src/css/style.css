@@ -20,7 +20,10 @@
 	border-radius: 50%;
 }
 
-
+.hidden {
+	display: none;
+	opacity: 0;
+}
 
 :root {
 	--clr-drk-1: #777da7;
