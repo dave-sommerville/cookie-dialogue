@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+
+
 .container {
 	width: min(100% - 30px, 1200px);
 	margin-inline: auto;
@@ -37,6 +39,19 @@
 	--clr-text: #fefefe;
 }
 
+a {
+	text-decoration: none;
+	font-size: inherit;
+	font-family: inherit;
+	color: inherit;
+}
+
+button {
+	border: none;
+	outline: none;
+	text-decoration: none;
+}
+
 body {		
 	font-family: "Poppins", Arial, sans-serif;
 	color: #fefefe;
@@ -52,6 +67,36 @@ main {
 	z-index: 0;
 }
 
+.background-banner {
+	height: 100svh;
+	width: 100svw;
+	background: #fff url('../img/cookie.jpg') no-repeat center center;
+	background-size: cover;
+	align-items: center;
+	position: fixed;
+	z-index: -1;
+
+	h1 {
+		font-size: 4rem;
+		color: #023;
+		text-align: center;
+		margin: 50px;
+	}
+
+	i {
+		font-size: 3.5rem;
+		color: #023;
+	}
+
+	div {
+		height: 60px;
+		width: 60px;
+		background-color: #fefefe;
+		justify-content: center;
+		align-items: center;
+	}
+
+}
 .cookie-dialogue, .cookie-settings {
 	width: 300px;
 	height: 350px;
@@ -65,9 +110,6 @@ h3 {
 }
 
 button {
-	border: none;
-	outline: none;
-	text-decoration: none;
 	border-radius: 50px;
 	border: solid 1px #3fa7d6;
 	color: #3fa7d6;
@@ -86,7 +128,7 @@ button:hover {
 
 .accept {
 	margin-right: 10px;
-	color: #fff;
+	color: #fefefe;
 	background-color: #3fa7d6;
 }
 /* Parent container for the toggle group */
@@ -107,7 +149,7 @@ button:hover {
 /* Text for each toggle */
 .toggle-text {
   font-size: 1rem;
-  color: #fff;
+  color: #fefefe;
 }
 
 /* Reuse existing toggle styles */
