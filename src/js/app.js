@@ -14,13 +14,9 @@ function listen(event, selector, callback) {
 
 const { log } = console;
 
-const userAgent = navigator.userAgent;
-let pageWidth = window.innerWidth;
-let pageHeight = window.innerHeight;
-
-const date = new Date();
-date.setSeconds(date.getSeconds() + 15); 
-let UTCDate = date.toUTCString();
+/*------------------------------------>
+    Element Declarations 
+<-----------------------------------*/
 
 const osToggle = select('#toggle1');
 const browserToggle = select('#toggle2');
@@ -33,8 +29,23 @@ const cookieSettings = select('.cookie-settings');
 const userSettings = select('.settings')
 
 /*------------------------------------>
+    Global Values 
+<-----------------------------------*/
+
+const userAgent = navigator.userAgent;
+let pageWidth = window.innerWidth;
+let pageHeight = window.innerHeight;
+
+const date = new Date();
+date.setSeconds(date.getSeconds() + 15); 
+let UTCDate = date.toUTCString();
+
+
+
+/*------------------------------------>
     Cookie Functions
 <-----------------------------------*/
+
 function hasCookies() {
 	if (document.cookie.length <= 0) {
 		cookieDialogue.classList.remove('hidden');
@@ -49,6 +60,11 @@ function getCookie(name) {
 	const match = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
 	return match ? decodeURIComponent(match[1]) : null;
 }
+
+/*------------------------------------>
+  User Agent Info
+<-----------------------------------*/
+
 
 let operatingSystem = 'Unknown OS';
 
@@ -82,6 +98,10 @@ function getBrowser() {
     }
 }
 
+/*------------------------------------>
+  Cookie Preference s 
+<-----------------------------------*/
+
 
 function acceptAll() {
 	setCookie("Operating System", operatingSystem);
@@ -105,12 +125,17 @@ function settings() {
 	} 
 }
 
+/*------------------------------------>
+    Listeners 
+<-----------------------------------*/
+
+
+getOperatingSystem();
+getBrowser();
 listen('load', window, () => {
 	hasCookies();
 });
 
-getOperatingSystem();
-getBrowser();
 
 listen('click', userSettings, () => {
 	cookieSettings.classList.remove('hidden');
