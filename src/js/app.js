@@ -11,7 +11,38 @@ function select(selector, scope = document) {
 function listen(event, selector, callback) {
 	return selector.addEventListener(event, callback);
 }
+const { log } = console;
+const { cookie } = document;
 
+// Setting expiry 
+const date = new Date();
+date.setSeconds(date.getSeconds() + 15);
+let UTCDate = date.toUTCString();
+
+let maxAge = 15;
+// Below is mostly for reference atm
+document.cookie = `City=Winnipeg; path=/; max-age=${maxAge}; SameSite=Lax`;
+let fullNameKey = encodeURIComponent('Full name');
+let fullNameValue = encodeURIComponent('John Smith');
+let cityName = encodeURIComponent('New York');
+document.cookie = `${fullNameKey}=${fullNameValue}`;
+document.cookie = `City=${cityName}`;
+
+// This will perform a log function instead
+// Must remember to encode 
+function printCookies() {
+	if (document.cookie.length > 0) {
+		const cookies = document.cookie.split('; ');
+		for (let i = 0; i < cookies.length; i++) {
+			console.log (`
+				${decodeURIComponent(cookies[i].split('=')[0])}: ${decodeURIComponent(cookies[i].split('=')[1])}
+			`);
+		}
+	} else {
+	console.log('No coookies found');
+	}
+}
+printCookies();
 /*------------------------------------>
     Variable Declarations
 <-----------------------------------*/
